@@ -1,0 +1,90 @@
+#include <iostream>
+
+using namespace std;
+
+class Auto
+{
+public:
+    const int ulesekSzam = 4;
+    virtual void setLoEro(double ero);
+    void setMarka(string m);
+    double getLoEro() { return loEro; }
+    string getMarka() { return marka; }
+    void print()
+    {
+        cout << "Marka: " << marka << ", "
+             << "Loero: " << loEro << ", " << endl;
+    }
+    Auto(string m, double loE)
+    {
+        this->marka = m;
+        this->loEro = loE;
+    }
+
+private:
+    string marka;
+
+protected:
+    double loEro;
+};
+
+class SportAuto : public Auto
+{
+public:
+    const int ulesekSzam = 2;
+    void setLoEro(double loEro);
+    SportAuto(string m, double loE) : Auto(m, loE)
+    {
+        // C# : vase(m, loE)
+        // Java: super(m, loE)
+    }
+
+protected:
+private:
+};
+
+void Auto::setLoEro(double loEro)
+{
+    // lyuk a hatáskörben, a mező az az egész osztályban látható
+    // akkor vanlyuk a hatáskörben amikor  valamely paraméternek ugyanaz a neve mint a mezőnek,
+    // ekkor kötelező kitenni a minősítést
+    if (loEro < 0)
+    {
+        loEro = 75;
+    }
+
+    this->loEro = loEro;
+}
+
+void SportAuto::setLoEro(double loEro)
+{
+    if (loEro < 180)
+    {
+        loEro = 180;
+    }
+
+    this->loEro = loEro;
+}
+
+void Auto::setMarka(string m)
+{
+    if (m.length() < 3)
+    {
+        cout << "FIGYELMEZTETES: rovid marka nev" << endl;
+    }
+
+    this->marka = m;
+}
+
+int main()
+{
+
+    Auto a1("Opel", 75), a2("Audi", 120);
+    // az autó nevű osztálynak két példánya van: a1 és a2
+    a1.print();
+    a2.print();
+
+    Auto *s1 = new SportAuto("Koenigsegg", 1423.0);
+    s1->setLoEro(75);
+    cout << s1->getLoEro() << endl;
+}
