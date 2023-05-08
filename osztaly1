@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+
+class Ember{
+	public:
+		string szemszin;
+		Ember(string szemszin_ertek,int id_ertek) {
+			this->szemszin = szemszin_ertek;
+			this->id = id_ertek;
+		}
+		int getter() {
+			return this->id;
+		}
+		void setter(int new_val) {
+			this->id = new_val;
+		}
+
+	private:
+		int id;
+};
+
+
+
+int main()
+{
+	Ember Jozsi("zold",55);
+	Jozsi.szemszin = "Zold";
+	cout << Jozsi.szemszin << endl;
+	cout << Jozsi.getter() << endl;
+	Jozsi.setter(56);
+
+	cout << Jozsi.szemszin << endl;
+	cout << Jozsi.getter() << endl;
+	return 0;
+}
