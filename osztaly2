@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+class ember
+{
+public:
+    void setNev(string n);
+    void setCim(string c);
+    string getCim() { return nev; }
+    string getNev() { return cim; }
+
+    ember(string n, string c)
+    {
+        this->nev = n;
+        this->cim = c;
+    }
+
+protected:
+    string nev;
+    string cim;
+};
+
+class dolgozo : public ember
+{
+public:
+    void setFiz(double fiz);
+    double getFiz() { return fizetes; }
+
+    dolgozo(double f) : ember(n, c)
+    {
+        this->fizetes = f;
+    }
+
+private:
+    double fizetes;
+};
+
+void ember ::setNev(string nev)
+{
+    this->nev = nev;
+}
+
+void ember ::setCim(string cim)
+{
+    this->cim = cim;
+}
+
+void dolgozo ::setFiz(double fizu)
+{
+    if (fizu < 0)
+    {
+        this->fizetes = 0;
+    }
+    this->fizetes = fizu;
+}
+
+int main()
+{
+}
