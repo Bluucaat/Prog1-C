@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class MunkaVallalo{
+private:
+    double fizetes;
+protected:
+    std::string nev;
+    MunkaVallalo* fonok;
+public:
+    MunkaVallalo(double fiz, std::string nev, MunkaVallalo* fonok){
+        this->fizetes = fiz;
+        this->nev = nev;
+        this->fonok = fonok;
+
+    }
+    MunkaVallalo(double fiz, std::string nev) {
+        this->fizetes = fiz;
+        this->nev = nev;
+    }
+    double getFizu() { return fizetes; }
+    MunkaVallalo* getFonok(){return fonok;}
+
+
+};
+
+class MunkaVallaloKontener {
+        private:
+    vector<MunkaVallalo> mv;
+        public:
+    void ujMunkaVallalo(MunkaVallalo munkas) {
+       mv.push_back(munkas);
+    }
+public:
+    double fizuAtlag(){
+        int db = 0;
+        double szum=0;
+        for(auto i = mv.begin(); i != mv.end(); i++){
+            db++;
+            szum += ((*i).getFizu());
+        }
+        if(db == 0){return 0;}
+        else{
+            return szum/db;
+        }
+    };
+
+    int hanyFonokVan(){
+        int db = 0;
+        for(auto i = mv.begin(); i != mv.end(); i++){
+            if((*i).getFonok() == NULL){
+                db++;
+            }
+        }
+        return db;
+    }
+};
+
+
+
+int main() {
+    MunkaVallalo foni = MunkaVallalo(200000, "Krisztian", NULL);
+    MunkaVallalo m1 = MunkaVallalo(300000, "Gabor", &foni);
+
+    //vector<MunkaVallalo> mv;
+    //mv.push_back(m1);
+    //mv.push_back(foni);
+    //vector<MunkaVallalo> fizuAtlag(mv);
+    //vector<MunkaVallalo> hanyFonokVan(mv);
+
+    MunkaVallaloKontener mv2;
+    mv2.ujMunkaVallalo(m1);
+    mv2.ujMunkaVallalo(foni);
+    cout << "az atlag fizetes ";
+    cout << mv2.fizuAtlag() <<endl;
+    cout << mv2.hanyFonokVan() <<endl;
+}
